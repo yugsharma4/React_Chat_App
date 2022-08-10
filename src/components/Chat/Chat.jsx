@@ -33,17 +33,17 @@ const Chat = () => {
 
     socket.on("welcome", (data) => {
       setMessages([...messages, data]);
-      console.log(data.user, data.message);
+      //   console.log(data.user, data.message);
     });
 
     socket.on("userJoined", (data) => {
       setMessages([...messages, data]);
-      console.log(data.user, data.message);
+      //   console.log(data.user, data.message);
     });
 
     socket.on("leave", (data) => {
       setMessages([...messages, data]);
-      console.log(data.user, data.message);
+      //   console.log(data.user, data.message);
     });
 
     return () => {
@@ -55,7 +55,7 @@ const Chat = () => {
   useEffect(() => {
     socket.on("sendMessage", (data) => {
       setMessages([...messages, data]);
-      console.log(data.user, data.message, data.id);
+      //   console.log(data.user, data.message, data.id);
     });
 
     return () => {
@@ -83,7 +83,11 @@ const Chat = () => {
           ))}
         </ReactScrollToBottom>
         <div className="inputBox">
-          <input type="text" id="chatInput" />
+          <input
+            onKeyDownCapture={(e) => (e.key == "Enter" ? send() : null)}
+            type="text"
+            id="chatInput"
+          />
           <button onClick={send} className="sendBtn">
             <img src={sendLogo} alt="Send" />
           </button>
